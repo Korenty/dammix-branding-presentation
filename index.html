@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAMmix | Build Without Limits</title>
+    <meta name="description" content="DAMmix: Precision engineering for construction chemicals. We design through limits.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. CORE VARIABLES & RESET --- */
+        :root {
+            /* Brand Colors */
+            --dam-blue: #0F1F35;      /* Deep Engineering Blue */
+            --dam-blue-light: #1A2E48;
+            --dam-red: #D62828;       /* Limit/Alert Red */
+            --concrete-grey: #F4F5F7; /* Lab/Material Background */
+            --text-main: #0F1F35;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+
+            /* Spacing & Grid */
+            --container-width: 1200px;
+            --header-height: 80px;
+            --border-thin: 1px solid rgba(15, 31, 53, 0.1);
+            --border-light: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- 2. TYPOGRAPHY & UTILITIES --- */
+        h1, h2, h3, h4 { letter-spacing: -0.02em; font-weight: 800; }
+        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; position: relative; }
+        
+        .section-padding { padding: 120px 0; }
+        .bg-dark { background-color: var(--dam-blue); color: var(--white); }
+        .bg-grey { background-color: var(--concrete-grey); }
+        
+        .text-red { color: var(--dam-red); }
+        .text-blue { color: var(--dam-blue); }
+        
+        /* --- 3. UI ELEMENTS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 32px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary {
+            background-color: var(--dam-red);
+            color: var(--white);
+        }
+        .btn-primary:hover { background-color: #B01E1E; }
+        
+        .btn-outline {
+            border-color: rgba(255,255,255,0.3);
+            color: var(--white);
+        }
+        .btn-outline:hover {
+            border-color: var(--dam-red);
+            color: var(--dam-red);
+        }
+
+        /* Technical Grid Lines */
+        .grid-lines {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 24px;
+            opacity: 0.05;
+        }
+        .grid-line { width: 1px; height: 100%; background: currentColor; }
+
+        /* Crosshairs */
+        .crosshair {
+            position: absolute;
+            width: 20px; height: 20px;
+            border-top: 1px solid currentColor;
+            border-left: 1px solid currentColor;
+            opacity: 0.3;
+        }
+        .ch-tl { top: 24px; left: 24px; }
+        .ch-tr { top: 24px; right: 24px; transform: rotate(90deg); }
+        .ch-bl { bottom: 24px; left: 24px; transform: rotate(-90deg); }
+        .ch-br { bottom: 24px; right: 24px; transform: rotate(180deg); }
+
+        /* --- 4. NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            height: var(--header-height);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: var(--border-thin);
+            transition: transform 0.3s ease;
+        }
+        
+        header nav {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--dam-blue);
+        }
+        .logo span { background: var(--dam-blue); color: var(--white); padding: 2px 6px; }
+        .logo b { color: var(--dam-red); }
+
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dam-blue);
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+            background: var(--dam-red); transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--dam-blue);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 24px;
+        }
+        
+        .hero-line {
+            width: 4px;
+            height: 0;
+            background: var(--dam-red);
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: drawLine 1.5s ease-out forwards;
+        }
+
+        .limit-tag {
+            background: var(--dam-red);
+            padding: 4px 12px;
+            display: inline-block;
+            margin-bottom: 24px;
+            font-size: 0.8rem;
+        }
+
+        /* --- 6. CONCEPT DECONSTRUCTION --- */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .logo-analysis {
+            position: relative;
+            height: 400px;
+            background: var(--concrete-grey);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: var(--border-thin);
+        }
+
+        /* CSS Representation of the Logo Concept */
+        .css-logo-stage {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+        .css-red-line {
+            position: absolute;
+            right: 40px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--dam-red);
+            z-index: 2;
+        }
+        .css-blue-path {
+            position: absolute;
+            left: 20px;
+            bottom: 40px;
+            width: 160px;
+            height: 120px;
+            z-index: 1;
+        }
+        /* Using SVG for the precise curve */
+        .css-blue-path svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+        .path-draw {
+            fill: none;
+            stroke: var(--dam-blue);
+            stroke-width: 25;
+            stroke-linecap: square;
+        }
+
+        .concept-text ul { list-style: none; margin-top: 30px; }
+        .concept-text li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 2px solid var(--dam-red);
+        }
+
+        /* --- 7. STRESS TEST CARDS --- */
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .test-card {
+            background: var(--white);
+            padding: 32px;
+            border: var(--border-thin);
+            transition: transform 0.3s;
+        }
+        .test-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        
+        .score-bar {
+            height: 4px;
+            background: #E2E8F0;
+            margin-top: 16px;
+            position: relative;
+        }
+        .score-fill {
+            height: 100%;
+            background: var(--dam-blue);
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+
+        /* --- 8. COMPETITOR MATRIX --- */
+        .comp-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--white);
+            margin-top: 40px;
+        }
+        .comp-table th { text-align: left; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); font-family: 'JetBrains Mono', monospace; color: var(--text-muted); }
+        .comp-table td { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .comp-row-dam { background: rgba(214, 40, 40, 0.1); border-left: 4px solid var(--dam-red); }
+
+        /* --- 9. BRAND IDENTITY MANUAL --- */
+        .color-palette { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+        .swatch {
+            width: 100px; height: 100px;
+            border: 1px solid rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 10px;
+            font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes drawLine {
+            0% { height: 0; opacity: 0; }
+            100% { height: 100%; opacity: 1; }
+        }
+
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .concept-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified for demo */
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <span>DAM</span><b>mix</b>
+                </a>
+                <div class="nav-links">
+                    <a href="#narrative">Philosophy</a>
+                    <a href="#stress-test">Performance Data</a>
+                    <a href="#competitors">Market Position</a>
+                    <a href="#identity">Identity System</a>
+                    <a href="#contact" style="color: var(--dam-red);">Contact Lab</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="grid-lines" style="color: rgba(255,255,255,0.1);">
+            <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        </div>
+        
+        <div class="hero-line" style="left: 70%;"></div>
+
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <span class="mono limit-tag">EST. 2025 // ADDIS ABABA</span>
+                <h1>BUILD<br>WITHOUT<br><span style="color: var(--dam-red);">LIMITS.</span></h1>
+                <p style="font-size: 1.25rem; max-width: 500px; margin-bottom: 40px; color: #94A3B8;">
+                    Construction chemicals engineered for the point where ordinary solutions fail. Precision beyond the threshold.
+                </p>
+                <a href="#narrative" class="btn btn-primary">EXPLORE THE SYSTEM</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="narrative" class="section-padding">
+        <div class="container">
+            <div class="crosshair ch-tl text-blue"></div>
+            <div class="crosshair ch-br text-blue"></div>
+
+            <span class="mono text-red">01 // THE METAPHOR</span>
+            <h2 style="font-size: 2.5rem; margin: 20px 0 60px 0;">ENGINEERED TRAJECTORY</h2>
+
+            <div class="concept-grid">
+                <div class="logo-analysis fade-in-up">
+                    <div class="css-logo-stage">
+                        <div class="css-red-line"></div>
+                        <div class="css-blue-path">
+                            <svg viewBox="0 0 160 120">
+                                <path d="M10,60 L50,100 L140,10" class="path-draw" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div style="position: absolute; bottom: 20px; left: 20px; font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">
+                        FIG 1.1: TRAJECTORY VS CONSTRAINT
+                    </div>
+                </div>
+
+                <div class="concept-text fade-in-up">
+                    <p style="font-size: 1.1rem; color: var(--dam-blue);">
+                        The DAMmix symbol is not a checkmark. It is a diagram of force and resistance.
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>The Red Axis (Limit):</strong> Represents the constraints of the project—seismic events, extreme weather, time pressure, and material thresholds.
+                        </li>
+                        <li>
+                            <strong>The Blue Form (Trajectory):</strong> Represents the engineered solution. It does not stop at the limit. It is designed to pass through it, predictably and safely.
+                        </li>
+                        <li>
+                            <strong>The Balance:</strong> We do not ignore limits. We design against them.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stress-test" class="section-padding bg-grey">
+        <div class="container">
+            <span class="mono text-blue">02 // STRESS TEST DATA</span>
+            <h2 style="font-size: 2.5rem; margin: 20px 0 10px 0;">VALIDATED PERFORMANCE</h2>
+            <p style="max-width: 600px; margin-bottom: 40px;">
+                We subjected the visual identity to real-world construction environments to ensure legibility, authority, and durability.
+            </p>
+
+            <div class="test-grid">
+                <div class="test-card fade-in-up">
+                    <span class="mono text-muted">SCENARIO A</span>
+                    <h4>Product Packaging</h4>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">200L Drums, IBC Tanks, Cement Bags in high dust environments.</p>
+                    <div class="score-bar"><div class="score-fill" style="width: 95%;"></div></div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.8rem; font-weight: bold;">
+                        <span>SCORE</span><span>9.5/10</span>
+                    </div>
+                </div>
+
+                <div class="test-card fade-in-up" style="transition-delay: 0.1s;">
+                    <span class="mono text-muted">SCENARIO B</span>
+                    <h4>Technical Documentation</h4>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">TDS, MSDS, Lab Reports printed in B&W or photocopied.</p>
+                    <div class="score-bar"><div class="score-fill" style="width: 98%;"></div></div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.8rem; font-weight: bold;">
+                        <span>SCORE</span><span>9.8/10</span>
+                    </div>
+                </div>
+
+                <div class="test-card fade-in-up" style="transition-delay: 0.2s;">
+                    <span class="mono text-muted">SCENARIO C</span>
+                    <h4>Seismic/Mega Projects</h4>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">Visual trust required by international EPC consultants.</p>
+                    <div class="score-bar"><div class="score-fill" style="width: 92%;"></div></div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.8rem; font-weight: bold;">
+                        <span>SCORE</span><span>9.2/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competitors" class="section-padding bg-dark">
+        <div class="container">
+            <div class="grid-lines" style="color: rgba(255,255,255,0.05);">
+                <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+            </div>
+
+            <div style="position: relative; z-index: 2;">
+                <span class="mono text-red">03 // MARKET INTELLIGENCE</span>
+                <h2 style="font-size: 2.5rem; margin: 20px 0 40px 0;">POSITIONING MATRIX</h2>
+                
+                <table class="comp-table fade-in-up">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">BRAND ARCHETYPE</th>
+                            <th style="width: 30%;">FOCUS</th>
+                            <th style="width: 30%;">VISUAL SIGNAL</th>
+                            <th style="width: 15%;">PERCEPTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>The Global Giant (Sika/BASF)</td>
+                            <td>Volume & Broad Portfolio</td>
+                            <td>Yellow/Green/Red Triangles</td>
+                            <td>Reliable but Generic</td>
+                        </tr>
+                        <tr>
+                            <td>The Local Commodity</td>
+                            <td>Price & Speed</td>
+                            <td>Literal Buildings/Mixers</td>
+                            <td>Low-End Supplier</td>
+                        </tr>
+                        <tr>
+                            <td>The Scientific Niche (GCP)</td>
+                            <td>Specific Tech</td>
+                            <td>Abstract Molecules</td>
+                            <td>Academic</td>
+                        </tr>
+                        <tr class="comp-row-dam">
+                            <td style="font-weight: bold; color: var(--white);">DAMmix</td>
+                            <td style="font-weight: bold;">Precision & Limit Engineering</td>
+                            <td style="font-weight: bold;">Structured Trajectory</td>
+                            <td style="font-weight: bold;">Specialized Partner</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="identity" class="section-padding">
+        <div class="container">
+            <span class="mono text-blue">04 // SYSTEM CORE</span>
+            <h2 style="font-size: 2.5rem; margin: 20px 0 40px 0;">VISUAL SPECIFICATIONS</h2>
+            
+            <div class="concept-grid">
+                <div>
+                    <h3>Color Architecture</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Colors are functional, not decorative. Blue indicates structure, Red indicates limits/alerts.</p>
+                    <div class="color-palette">
+                        <div class="swatch" style="background: #0F1F35; color: white;">
+                            <span>DAM BLUE</span>
+                            <span>#0F1F35</span>
+                            <span>PANTONE 289 C</span>
+                        </div>
+                        <div class="swatch" style="background: #D62828; color: white;">
+                            <span>LIMIT RED</span>
+                            <span>#D62828</span>
+                            <span>PANTONE 186 C</span>
+                        </div>
+                        <div class="swatch" style="background: #F4F5F7; color: #0F1F35;">
+                            <span>LAB GREY</span>
+                            <span>#F4F5F7</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Typographic Hierarchy</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">We use two typefaces: One for humanity, one for data.</p>
+                    <div style="border: var(--border-thin); padding: 24px;">
+                        <div style="font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 800;">Inter Bold</div>
+                        <div style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-muted); margin-bottom: 16px;">Primary Headlines & Messaging</div>
+                        
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem;">JetBrains Mono</div>
+                        <div style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-muted);">Technical Data, specs, and labels.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark" style="padding: 80px 0 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px;">
+                <div>
+                    <a href="#" class="logo" style="color: white; margin-bottom: 20px; display: inline-block;">
+                        <span style="background: white; color: var(--dam-blue);">DAM</span><b style="color: var(--dam-red);">mix</b>
+                    </a>
+                    <p style="max-width: 300px; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+                        Addis Ababa, Ethiopia<br>
+                        Global Engineering HQ
+                    </p>
+                </div>
+                
+                <div style="display: flex; gap: 60px;">
+                    <div>
+                        <h5 class="mono" style="margin-bottom: 20px; color: rgba(255,255,255,0.4);">SYSTEM</h5>
+                        <ul style="list-style: none; line-height: 2;">
+                            <li><a href="#" style="color: white; text-decoration: none;">Brand Guidelines</a></li>
+                            <li><a href="#" style="color: white; text-decoration: none;">Assets Download</a></li>
+                            <li><a href="#" style="color: white; text-decoration: none;">Voice & Tone</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="mono" style="margin-bottom: 20px; color: rgba(255,255,255,0.4);">CONNECT</h5>
+                        <ul style="list-style: none; line-height: 2;">
+                            <li><a href="#" style="color: white; text-decoration: none;">Engineering Team</a></li>
+                            <li><a href="#" style="color: white; text-decoration: none;">Tender Portal</a></li>
+                            <li><a href="#" style="color: white; text-decoration: none;">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; font-size: 0.8rem; color: rgba(255,255,255,0.4);">
+                <span>© 2026 DAMmix Engineering. All Rights Reserved.</span>
+                <span class="mono">SYSTEM STATUS: OPERATIONAL</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Intersection Observer for Fade In Animations
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        
+                        // If it's the score bar, animate width
+                        const scoreBars = entry.target.querySelectorAll('.score-fill');
+                        scoreBars.forEach(bar => {
+                            const width = bar.style.width;
+                            bar.style.width = '0';
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 300);
+                        });
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach(el => observer.observe(el));
+
+            // Header transparency toggle
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.9)';
+                    header.style.boxShadow = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
