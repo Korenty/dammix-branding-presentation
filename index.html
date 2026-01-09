@@ -1,286 +1,742 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAMmix | Build Without Limits | Brand System</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAMmix | Build Without Limits | Brand System</title>
+    <meta name="description" content="DAMmix: Precision engineering for construction chemicals. Visual Identity System.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"> 
 
-    <style>
-        :root {
-            --dam-blue: #0F1F35;
-            --dam-red: #D62828;
-            --concrete-grey: #F4F5F7;
-            --text-main: #0F1F35;
-            --text-muted: #64748B;
-            --white: #FFFFFF;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --container-width: 1400px;
-            --header-height: 100px;
-            --radius-md: 8px;
-            --shadow-card: 0 10px 30px rgba(0,0,0,0.05);
-            --border-thin: 1px solid rgba(15, 31, 53, 0.1);
-        }
+    <style>
+        /* --- 1. CORE VARIABLES & RESET --- */
+        :root {
+            /* Brand Colors */
+            --dam-blue: #0F1F35;      /* Deep Engineering Blue */
+            --dam-blue-light: #1A2E48;
+            --dam-red: #D62828;       /* Limit/Alert Red */
+            --concrete-grey: #F4F5F7; /* Lab/Material Background */
+            --text-main: #0F1F35;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --warning: #F59E0B; 
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--white); line-height: 1.5; overflow-x: hidden; }
-        img { max-width: 100%; height: auto; display: block; }
-        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; }
-        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 40px; position: relative; }
-        .section-padding { padding: 160px 0; }
-        .bg-dark { background-color: var(--dam-blue); color: var(--white); }
-        .bg-grey { background-color: var(--concrete-grey); }
-        .text-red { color: var(--dam-red); }
+            /* Spacing & Layout */
+            --container-width: 1280px;
+            --header-height: 90px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            
+            /* Borders & Shadows */
+            --border-thin: 1px solid rgba(15, 31, 53, 0.1);
+            --border-light: 1px solid rgba(255, 255, 255, 0.15);
+            --shadow-card: 0 10px 30px rgba(0,0,0,0.05);
+            --shadow-hover: 0 30px 60px rgba(0,0,0,0.12);
+        } 
 
-        /* --- NAVIGATION (Increased Logo Size) --- */
-        header {
-            position: fixed; top: 0; width: 100%; height: var(--header-height);
-            z-index: 1000; background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px); border-bottom: var(--border-thin);
-        }
-        header nav { height: 100%; display: flex; justify-content: space-between; align-items: center; }
-        .logo-container img { height: 55px; width: auto; transition: transform 0.3s; }
-        .logo-container:hover img { transform: scale(1.05); }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { text-decoration: none; color: var(--dam-blue); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--white);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        } 
 
-        /* --- HERO --- */
-        .hero { height: 100vh; display: flex; align-items: center; position: relative; background-color: var(--dam-blue); overflow: hidden; }
-        .hero-bg { position: absolute; inset: 0; background-image: url('assets/images/hero-batch-plant.jpg'); background-size: cover; background-position: center; opacity: 0.5; transform: scale(1.1); }
-        .hero-content { position: relative; z-index: 10; color: white; }
-        .hero h1 { font-size: clamp(4rem, 8vw, 8.5rem); line-height: 0.85; margin-bottom: 20px; font-weight: 800; }
+        img { max-width: 100%; height: auto; display: block; } 
 
-        /* --- SYSTEM DEFINITIONS --- */
-        .definition-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
-        .def-item h4 { margin-bottom: 15px; font-size: 1.2rem; }
-        .def-item p { font-size: 0.95rem; color: var(--text-muted); }
+        /* --- 2. TYPOGRAPHY & UTILITIES --- */
+        h1, h2, h3, h4 { letter-spacing: -0.03em; font-weight: 800; line-height: 1.1; }
+        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; }
+        
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; position: relative; }
+        .section-padding { padding: 140px 0; }
+        
+        .bg-dark { background-color: var(--dam-blue); color: var(--white); }
+        .bg-grey { background-color: var(--concrete-grey); }
+        
+        .text-red { color: var(--dam-red); }
+        .text-blue { color: var(--dam-blue); }
+        
+        /* Grid Utilities */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; } 
 
-        /* --- LOGO VARIATIONS (Closeup) --- */
-        .logo-showcase-v2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 60px; }
-        .variant-closeup { 
-            background: var(--concrete-grey); 
-            padding: 100px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            border: var(--border-thin);
-        }
-        .variant-closeup.dark { background: var(--dam-blue); border: none; }
-        .variant-closeup img { width: 85%; height: auto; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .variant-closeup:hover img { transform: scale(1.1); }
+        /* --- 3. UI ELEMENTS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 18px 36px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+            border: 1px solid transparent;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+        
+        .btn-primary { background-color: var(--dam-red); color: var(--white); }
+        .btn-primary:hover { background-color: #B01E1E; transform: translateY(-2px); }
+        
+        .btn-outline { border-color: rgba(255,255,255,0.3); color: var(--white); }
+        .btn-outline:hover { border-color: var(--dam-red); color: var(--dam-red); background: rgba(0,0,0,0.2); } 
 
-        /* --- STRESS TEST SLIDER --- */
-        .slider-wrapper { overflow-x: auto; display: flex; gap: 30px; padding: 40px 0; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-        .slider-wrapper::-webkit-scrollbar { display: none; }
-        .lab-card { 
-            min-width: 500px; 
-            scroll-snap-align: start; 
-            background: white; 
-            border: var(--border-thin); 
-            border-radius: var(--radius-md); 
-            overflow: hidden; 
-        }
-        .lab-header { padding: 30px; background: var(--dam-blue); color: white; display: flex; justify-content: space-between; }
-        .lab-body { padding: 30px; }
-        .score-val { font-size: 3rem; font-weight: 800; color: var(--dam-red); }
+        /* Technical Overlay Lines */
+        .grid-lines {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none; z-index: 1; display: flex; justify-content: space-between; padding: 0 40px; opacity: 0.06;
+        }
+        .grid-line { width: 1px; height: 100%; background: currentColor; } 
 
-        /* --- COMPETITOR ANALYSIS (Expanded) --- */
-        .comp-table-v2 { border-top: 2px solid var(--dam-red); }
-        .comp-row { display: grid; grid-template-columns: 200px 1fr 1fr 1fr; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 40px 0; align-items: center; }
-        .advantage-row { background: rgba(214, 40, 40, 0.05); padding: 20px; border-radius: 4px; margin-top: 15px; color: #fff; font-size: 0.9rem; border-left: 3px solid var(--dam-red); }
-        .advantage-row strong { color: var(--dam-red); font-family: 'JetBrains Mono'; margin-right: 10px; }
+        /* --- 4. NAVIGATION --- */
+        header {
+            position: fixed; top: 0; width: 100%; height: var(--header-height);
+            z-index: 1000; background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px); border-bottom: var(--border-thin);
+            transition: transform 0.3s ease;
+        }
+        
+        header nav { height: 100%; display: flex; justify-content: space-between; align-items: center; } 
 
-        /* ANIMATIONS */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-    </style>
+        .logo-container img { height: 40px; width: auto; } 
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a {
+            text-decoration: none; color: var(--dam-blue); font-size: 0.85rem;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+            position: relative; opacity: 0.7; transition: opacity 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--dam-red); transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; } 
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--dam-blue);
+        } 
+
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('assets/images/hero-batch-plant.jpg'); /* Default */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+            transform: scale(1.1);
+            animation: kenBurns 20s infinite alternate;
+            z-index: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(15,31,53,0.95) 0%, rgba(15,31,53,0.7) 50%, rgba(15,31,53,0.2) 100%);
+            z-index: 1;
+        } 
+
+        .hero-content { position: relative; z-index: 10; max-width: 900px; color: var(--white); } 
+
+        .hero h1 { font-size: clamp(3.5rem, 6vw, 7rem); margin-bottom: 32px; line-height: 0.95; }
+        
+        .limit-line {
+            width: 100px; height: 6px; background: var(--dam-red);
+            margin-bottom: 32px; display: block;
+        } 
+
+        /* --- 6. CORE BRAND SECTION --- */
+        .brand-visuals { background: var(--white); }
+        
+        .logo-showcase {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+        } 
+
+        .main-logo-display {
+            padding: 80px;
+            background: var(--concrete-grey);
+            border: var(--border-thin);
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+        }
+        .main-logo-display::before { content: "PRIMARY CONFIGURATION"; position: absolute; top: 20px; left: 20px; font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); } 
+
+        .logo-variants { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .variant-card {
+            padding: 40px; border: var(--border-thin);
+            display: flex; flex-direction: column; align-items: center; gap: 20px;
+            transition: transform 0.3s;
+        }
+        .variant-card.dark { background: var(--dam-blue); border: none; }
+        .variant-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card); }
+        .variant-caption { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); }
+        .variant-card.dark .variant-caption { color: rgba(255,255,255,0.5); } 
+
+        /* --- 7. STRESS LAB (NEW SECTION) --- */
+        .stress-lab {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+        } 
+
+        .lab-card {
+            background: var(--white);
+            border: var(--border-thin);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        .lab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--dam-blue);
+        } 
+
+        .lab-header {
+            padding: 30px;
+            background: var(--dam-blue);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .score-badge {
+            text-align: right;
+        }
+        .score-val { font-size: 2.5rem; font-weight: 800; line-height: 1; display: block; }
+        .score-label { font-size: 0.7rem; opacity: 0.7; font-family: 'JetBrains Mono'; } 
+
+        .lab-body { padding: 30px; }
+        
+        .lab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .tag {
+            font-size: 0.7rem; font-family: 'JetBrains Mono'; padding: 4px 10px;
+            background: var(--concrete-grey); color: var(--text-muted); border-radius: 20px;
+        } 
+
+        .status-pill {
+            display: inline-block; padding: 6px 12px; font-weight: 700; font-size: 0.8rem;
+            border-radius: 4px; margin-bottom: 20px;
+        }
+        .status-pass { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid var(--success); }
+        .status-warn { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid var(--warning); } 
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .analysis-list { list-style: none; }
+        .analysis-list li { margin-bottom: 8px; font-size: 0.9rem; padding-left: 20px; position: relative; }
+        .analysis-list.good li::before { content: '✔'; color: var(--success); position: absolute; left: 0; }
+        .analysis-list.bad li::before { content: '⚠️'; color: var(--warning); position: absolute; left: 0; } 
+
+        .rec-box {
+            background: var(--concrete-grey);
+            padding: 20px;
+            border-left: 4px solid var(--dam-blue);
+            font-size: 0.9rem;
+        }
+        .rec-box strong { display: block; font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--dam-blue); margin-bottom: 6px; } 
+
+        /* --- 8. APPLICATION & MOCKUPS --- */
+        .mockup-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .mockup-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-card);
+            group: 'mockup';
+        }
+        
+        .mockup-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        
+        .mockup-item:hover img { transform: scale(1.05); }
+        
+        .mockup-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 24px;
+            background: linear-gradient(to top, rgba(15,31,53,0.9), transparent);
+            color: white; opacity: 0; transform: translateY(20px);
+            transition: all 0.4s;
+        }
+        .mockup-item:hover .mockup-overlay { opacity: 1; transform: translateY(0); } 
+
+        /* --- 9. COMPETITOR MATRIX --- */
+        .comp-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .comp-table { width: 100%; }
+        .comp-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 1fr 1fr;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 24px 0;
+            transition: background 0.3s;
+        }
+        
+        .comp-row:hover { background: rgba(255,255,255,0.02); }
+        .comp-row.dam-row { background: rgba(214, 40, 40, 0.1); border-left: 4px solid var(--dam-red); padding-left: 20px; }
+        
+        .comp-logo { max-width: 120px; filter: grayscale(100%) brightness(200%); opacity: 0.6; transition: all 0.3s; }
+        .comp-row:hover .comp-logo { filter: grayscale(0) brightness(100%); opacity: 1; }
+        .dam-row .comp-logo { filter: none; opacity: 1; max-width: 140px; }
+        
+        .cell-header { font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; display: block; } 
+
+        /* --- ANIMATIONS --- */
+        @keyframes kenBurns { 0% { transform: scale(1.0); } 100% { transform: scale(1.1); } }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); } 
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .logo-showcase { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .comp-row { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
+            .comp-row > div { margin-bottom: 10px; }
+            .stress-lab { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .analysis-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-<body>
+<body> 
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo-container">
-                    <img src="assets/images/logo-primary.png" alt="DAMmix Primary">
-                </a>
-                <div class="nav-links">
-                    <a href="#system">Brand Physics</a>
-                    <a href="#lab">Stress Lab</a>
-                    <a href="#market">Market Intelligence</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo-container">
+                    <img src="assets/images/logo-primary.png" alt="DAMmix Logo">
+                </a>
+                <div class="nav-links">
+                    <a href="#system">Identity System</a>
+                    <a href="#lab-test">Stress Lab</a>
+                    <a href="#applications">Real World</a>
+                    <a href="#market">Market Data</a>
+                    <a href="#" class="text-red">Contact Lab</a>
+                </div>
+            </nav>
+        </div>
+    </header> 
 
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="container">
-            <div class="hero-content fade-in">
-                <span class="mono text-red">Project: DAMmix Identity 2026</span>
-                <h1>ENGINEERED<br>FOR THE<br><span class="text-red">LIMIT.</span></h1>
-            </div>
-        </div>
-    </section>
+    <section class="hero">
+        <div class="hero-bg"></div> <div class="hero-overlay"></div>
+        <div class="grid-lines" style="color: rgba(255,255,255,0.1);">
+            <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        </div> 
 
-    <section id="system" class="section-padding">
-        <div class="container">
-            <span class="mono text-red">01 // VISUAL LOGIC</span>
-            <h2 style="font-size: 3.5rem; margin-top: 10px;">DESIGN ELEMENTS</h2>
-            
-            <div class="definition-grid fade-in">
-                <div class="def-item">
-                    <h4>The "DAM" Block</h4>
-                    <p>Heavy, uppercase typography representing structural integrity. The thick stems mimic reinforced concrete pillars, grounding the brand in stability and permanence.</p>
-                </div>
-                <div class="def-item">
-                    <h4>The Trajectory Icon</h4>
-                    <p>The geometric symbol signifies a breakthrough. It represents chemical additives penetrating the material matrix to improve performance beyond the baseline.</p>
-                </div>
-                <div class="def-item">
-                    <h4>Limit Red Line</h4>
-                    <p>The horizontal red stroke indicates the "Limit." It represents our ability to push material science exactly to the breaking point and then solve for it.</p>
-                </div>
-            </div>
+        <div class="container">
+            <div class="hero-content fade-in">
+                <span class="mono text-red" style="background: rgba(214, 40, 40, 0.1); padding: 5px 10px; display: inline-block; margin-bottom: 24px;">ENGINEERING // GLOBAL</span>
+                <span class="limit-line"></span>
+                <h1>BUILD<br>WITHOUT<br><span style="color: var(--dam-red);">LIMITS.</span></h1>
+                <p style="font-size: 1.25rem; max-width: 500px; margin-bottom: 40px; color: rgba(255,255,255,0.8);">
+                    Precision construction chemicals engineered for the point where ordinary solutions fail.
+                </p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="#system" class="btn btn-primary">VIEW BRAND SYSTEM</a>
+                    <a href="#lab-test" class="btn btn-outline">VIEW TEST DATA</a>
+                </div>
+            </div>
+        </div>
+    </section> 
 
-            <div class="logo-showcase-v2">
-                <div class="variant-closeup fade-in">
-                    <img src="assets/images/logo-primary.png" alt="Closeup Primary">
-                    <span class="mono" style="margin-top:20px;">Primary Brand Mark</span>
-                </div>
-                <div class="variant-closeup dark fade-in">
-                    <img src="assets/images/logo-negative.png" alt="Closeup Negative">
-                    <span class="mono" style="margin-top:20px; color: white;">Negative Matrix</span>
-                </div>
-                <div class="variant-closeup fade-in">
-                    <img src="assets/images/logo-monochrome.png" alt="Closeup Mono">
-                    <span class="mono" style="margin-top:20px;">Monochrome Contrast</span>
-                </div>
-                <div class="variant-closeup fade-in">
-                    <img src="assets/images/logo-grid.png" alt="Closeup Grid">
-                    <span class="mono" style="margin-top:20px;">Geometry & Alignment</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="system" class="section-padding brand-visuals">
+        <div class="container">
+            <span class="mono text-blue">01 // CORE IDENTITY</span>
+            <h2 style="font-size: 3rem; margin: 20px 0 60px 0;">PRECISION OPTICS</h2> 
 
-    <section id="lab" class="section-padding bg-grey">
-        <div class="container">
-            <span class="mono text-red">02 // FIELD PERFORMANCE</span>
-            <h2 style="font-size: 3.5rem; margin-top: 10px;">STRESS TEST LAB</h2>
-            <p style="color: var(--text-muted); margin-bottom: 40px;">Scroll horizontally to view all environments →</p>
-            
-            <div class="slider-wrapper fade-in">
-                <div class="lab-card">
-                    <div class="lab-header">
-                        <div><span class="mono">TEST 01</span><h3>PACKAGING</h3></div>
-                        <div class="score-val">9.2</div>
-                    </div>
-                    <div class="lab-body">
-                        <p>Drums and IBC Tanks. Bold DAM block ensures legibility through site dust and abrasion.</p>
-                        <div class="advantage-row" style="color: var(--text-main);"><strong>DAMmix ADVANTAGE:</strong> High-contrast red/blue palette cuts through industrial visual noise better than competitor yellows.</div>
-                    </div>
-                </div>
-                <div class="lab-card">
-                    <div class="lab-header">
-                        <div><span class="mono">TEST 02</span><h3>DISTANCE</h3></div>
-                        <div class="score-val">8.4</div>
-                    </div>
-                    <div class="lab-body">
-                        <p>Viewed from 40m on moving trucks. Wordmark does the heavy lifting while the icon builds familiarity.</p>
-                        <div class="advantage-row" style="color: var(--text-main);"><strong>DAMmix ADVANTAGE:</strong> Slab typography remains readable at oblique angles where serif fonts fail.</div>
-                    </div>
-                </div>
-                <div class="lab-card">
-                    <div class="lab-header">
-                        <div><span class="mono">TEST 03</span><h3>PPE & APPAREL</h3></div>
-                        <div class="score-val">9.5</div>
-                    </div>
-                    <div class="lab-body">
-                        <p>Embroidered and printed on helmets/vests. Icon-only mark performs exceptionally well on small surfaces.</p>
-                        <div class="advantage-row" style="color: var(--text-main);"><strong>DAMmix ADVANTAGE:</strong> Geometric symbol maintains integrity even with low-resolution embroidery threads.</div>
-                    </div>
-                </div>
-                <div class="lab-card">
-                    <div class="lab-header">
-                        <div><span class="mono">TEST 04</span><h3>LOW LIGHT SITE</h3></div>
-                        <div class="score-val">8.0</div>
-                    </div>
-                    <div class="lab-body">
-                        <p>Basement pours and night shifts. Negative logo variant provides high reflectivity on safety gear.</p>
-                        <div class="advantage-row" style="color: var(--text-main);"><strong>DAMmix ADVANTAGE:</strong> The "Limit Red" serves as a natural hazard warning signal, increasing site safety awareness.</div>
-                    </div>
-                </div>
-                <div class="lab-card">
-                    <div class="lab-header">
-                        <div><span class="mono">TEST 05</span><h3>DIGITAL TDS</h3></div>
-                        <div class="score-val">9.8</div>
-                    </div>
-                    <div class="lab-body">
-                        <p>Technical Data Sheets on mobile screens. Clean font choice allows for dense technical info to remain scannable.</p>
-                        <div class="advantage-row" style="color: var(--text-main);"><strong>DAMmix ADVANTAGE:</strong> Modern UI-first design language positions the brand as a "Tech-Chem" leader.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="logo-showcase fade-in">
+                <div class="main-logo-display">
+                    <img src="assets/images/logo-grid.png" alt="DAMmix Grid System" style="width: 80%; opacity: 0.9;">
+                </div>
+                <div class="logo-variants">
+                    <div class="variant-card">
+                        <img src="assets/images/logo-primary.png" alt="Primary Logo">
+                        <span class="variant-caption">PRIMARY</span>
+                    </div>
+                    <div class="variant-card dark">
+                        <img src="assets/images/logo-negative.png" alt="Negative Logo">
+                        <span class="variant-caption">NEGATIVE / DARK</span>
+                    </div>
+                    <div class="variant-card">
+                        <img src="assets/images/logo-monochrome.png" alt="Monochrome Logo">
+                        <span class="variant-caption">MONOCHROME</span>
+                    </div>
+                    <div class="variant-card">
+                        <img src="assets/images/logo-icon.png" alt="Icon Symbol" style="max-height: 80px;">
+                        <span class="variant-caption">ICON ONLY</span>
+                    </div>
+                </div>
+            </div> 
 
-    <section id="market" class="section-padding bg-dark">
-        <div class="container">
-            <span class="mono text-red">03 // MARKET INTELLIGENCE</span>
-            <h2 style="font-size: 3.5rem; margin: 10px 0 60px 0;">LANDSCAPE ANALYSIS</h2>
+            <div class="grid-2 fade-in">
+                <div>
+                    <h3 style="margin-bottom: 24px;">Color Physics</h3>
+                    <div class="grid-3" style="gap: 10px;">
+                        <div style="height: 120px; background: var(--dam-blue); padding: 15px; color: white; font-size: 0.8rem; display: flex; align-items: flex-end;">DAM BLUE<br>#0F1F35</div>
+                        <div style="height: 120px; background: var(--dam-red); padding: 15px; color: white; font-size: 0.8rem; display: flex; align-items: flex-end;">LIMIT RED<br>#D62828</div>
+                        <div style="height: 120px; background: var(--concrete-grey); padding: 15px; color: var(--dam-blue); font-size: 0.8rem; display: flex; align-items: flex-end;">LAB GREY<br>#F4F5F7</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; background: url('assets/images/hero-mixer-truck.jpg'); background-size: cover; border-radius: var(--radius-md); position: relative; overflow: hidden;">
+                    <div style="position: absolute; inset: 0; background: rgba(15,31,53,0.8);"></div>
+                    <p style="position: relative; color: white; text-align: center; max-width: 80%; font-size: 1.5rem; font-weight: 300;">
+                        "We do not overpower constraints. We design through them."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section> 
 
-            <div class="comp-table-v2 fade-in">
-                <div class="comp-row">
-                    <div><img src="assets/images/competitor-sika.png" class="comp-logo" alt="Sika"></div>
-                    <div><span class="mono" style="opacity: 0.5;">ARCHETYPE</span>The Global Giant</div>
-                    <div><span class="mono" style="opacity: 0.5;">VISUAL</span>Yellow Triangle</div>
-                    <div>
-                        <div class="advantage-row"><strong>DAMmix OVER:</strong> Sika is perceived as "Utility." DAMmix is perceived as "Precision Engineering." We win on high-spec project specs.</div>
-                    </div>
-                </div>
-                <div class="comp-row">
-                    <div><img src="assets/images/competitor-basf.png" class="comp-logo" alt="BASF"></div>
-                    <div><span class="mono" style="opacity: 0.5;">ARCHETYPE</span>Chemical Titan</div>
-                    <div><span class="mono" style="opacity: 0.5;">VISUAL</span>The Square</div>
-                    <div>
-                        <div class="advantage-row"><strong>DAMmix OVER:</strong> BASF is a massive chemical house. DAMmix feels like a specialized boutique lab—faster, more agile, and project-specific.</div>
-                    </div>
-                </div>
-                <div class="comp-row">
-                    <div><img src="assets/images/competitor-mc.png" class="comp-logo" alt="MC-Bauchemie"></div>
-                    <div><span class="mono" style="opacity: 0.5;">ARCHETYPE</span>German Rigor</div>
-                    <div><span class="mono" style="opacity: 0.5;">VISUAL</span>MC Monogram</div>
-                    <div>
-                        <div class="advantage-row"><strong>DAMmix OVER:</strong> We match their technical rigor but exceed in modern brand "energy" and on-site visual dominance.</div>
-                    </div>
-                </div>
-                <div class="comp-row" style="background: rgba(255,255,255,0.03); border-left: 5px solid var(--dam-red); padding-left: 20px;">
-                    <div><img src="assets/images/logo-primary.png" style="height: 50px; width: auto;" alt="DAMmix Primary"></div>
-                    <div style="font-weight: 800; color: white;">Precision Partner</div>
-                    <div style="font-weight: 800; color: white;">The Trajectory</div>
-                    <div style="font-weight: 800; color: var(--dam-red);">THE NEW STANDARD</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="lab-test" class="section-padding bg-grey">
+        <div class="container">
+            <span class="mono text-red">02 // FIELD VALIDATION</span>
+            <h2 style="font-size: 3rem; margin: 20px 0 60px 0;">REAL-WORLD STRESS TEST</h2>
+            
+            <div class="stress-lab">
+                
+                <div class="lab-card fade-in">
+                    <div class="lab-header">
+                        <div>
+                            <span class="mono" style="opacity: 0.7;">TEST ID: 001</span>
+                            <h3 style="margin-top: 5px;">PRODUCT PACKAGING</h3>
+                        </div>
+                        <div class="score-badge">
+                            <span class="score-val">9.2</span>
+                            <span class="score-label">OUT OF 10</span>
+                        </div>
+                    </div>
+                    <div class="lab-body">
+                        <div class="lab-tags">
+                            <span class="tag">DUST/SCRATCH</span>
+                            <span class="tag">LOW LIGHTING</span>
+                            <span class="tag">PARTIAL OBSTRUCTION</span>
+                        </div> 
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                    }
-                });
-            }, { threshold: 0.1 });
+                        <div style="margin-bottom: 20px;">
+                            <span class="mono" style="color: var(--text-muted); display:block; margin-bottom: 5px;">SCENARIO</span>
+                            <p style="font-size: 0.95rem;">200L steel drums, 1000L IBC tanks, and cement bags in harsh site conditions.</p>
+                        </div> 
 
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        });
-    </script>
+                        <div class="status-pill status-pass">✅ PASS (STRONG)</div> 
+
+                        <div class="analysis-grid">
+                            <div>
+                                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">WHY IT WORKS</h4>
+                                <ul class="analysis-list good">
+                                    <li>Bold DAM block is highly legible</li>
+                                    <li>Red “mix” creates fast brand recall</li>
+                                    <li>High contrast on white/metal</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">WATCH-OUTS</h4>
+                                <ul class="analysis-list bad">
+                                    <li>Symbol must not be printed too small</li>
+                                    <li>Red line risks loss if scaled below threshold</li>
+                                </ul>
+                            </div>
+                        </div> 
+
+                        <div class="rec-box">
+                            <strong>RECOMMENDATION</strong>
+                            Define a minimum symbol size rule. Create a symbol-only mark variant for tight spaces.
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="lab-card fade-in" style="transition-delay: 0.1s;">
+                    <div class="lab-header">
+                        <div>
+                            <span class="mono" style="opacity: 0.7;">TEST ID: 002</span>
+                            <h3 style="margin-top: 5px;">SITE VISIBILITY</h3>
+                        </div>
+                        <div class="score-badge">
+                            <span class="score-val">8.4</span>
+                            <span class="score-label">OUT OF 10</span>
+                        </div>
+                    </div>
+                    <div class="lab-body">
+                        <div class="lab-tags">
+                            <span class="tag">MOTION (60KM/H)</span>
+                            <span class="tag">DISTANCE (40M)</span>
+                            <span class="tag">GLARE/DIRT</span>
+                        </div> 
+
+                        <div style="margin-bottom: 20px;">
+                            <span class="mono" style="color: var(--text-muted); display:block; margin-bottom: 5px;">SCENARIO</span>
+                            <p style="font-size: 0.95rem;">Viewed on moving trucks and plants by operators and engineers from distance.</p>
+                        </div> 
+
+                        <div class="status-pill status-warn">⚠️ PASS (WITH CAVEAT)</div> 
+
+                        <div class="analysis-grid">
+                            <div>
+                                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">STRENGTHS</h4>
+                                <ul class="analysis-list good">
+                                    <li>DAM block is rock solid</li>
+                                    <li>Feels "technical" not decorative</li>
+                                    <li>Color contrast holds up well</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">WEAKNESSES</h4>
+                                <ul class="analysis-list bad">
+                                    <li>Abstract symbol slow to read from distance</li>
+                                    <li>Relies on familiarity, not instant shape recognition</li>
+                                </ul>
+                            </div>
+                        </div> 
+
+                        <div class="rec-box">
+                            <strong>RECOMMENDATION</strong>
+                            Prioritize wordmark for distance branding. Use symbol for close-range premium contexts (like Sika/MC).
+                        </div>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+    </section> 
+
+    <section id="applications" class="section-padding bg-white">
+        <div class="container">
+            <div class="grid-lines">
+                <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+            </div>
+            
+            <div style="position: relative; z-index: 2;">
+                <span class="mono text-blue">03 // VISUAL EVIDENCE</span>
+                <h2 style="font-size: 3rem; margin: 20px 0 60px 0;">APPLICATION MATRIX</h2> 
+
+                <div class="mockup-gallery">
+                    
+                    <div class="mockup-item fade-in" style="grid-column: span 2;">
+                        <img src="assets/images/mockup-truck.jpg" alt="Fleet Branding">
+                        <div class="mockup-overlay">
+                            <span class="mono">ASSET: FLEET LOGISTICS</span>
+                            <h3>High Visibility Motion</h3>
+                        </div>
+                    </div> 
+
+                    <div class="mockup-item fade-in">
+                        <img src="assets/images/mockup-drum.jpg" alt="Chemical Drum">
+                        <div class="mockup-overlay">
+                            <span class="mono">ASSET: 200L DRUM</span>
+                            <h3>Industrial Packaging</h3>
+                        </div>
+                    </div> 
+
+                    <div class="mockup-item fade-in">
+                        <img src="assets/images/mockup-jerrycan.jpg" alt="Retail Packaging">
+                        <div class="mockup-overlay">
+                            <span class="mono">ASSET: 20L CANISTER</span>
+                            <h3>Retail/Site Precision</h3>
+                        </div>
+                    </div> 
+
+                    <div class="mockup-item fade-in">
+                        <img src="assets/images/mockup-helmet.jpg" alt="PPE Branding">
+                        <div class="mockup-overlay">
+                            <span class="mono">ASSET: SITE SAFETY</span>
+                            <h3>Engineer Identity</h3>
+                        </div>
+                    </div> 
+
+                     <div class="mockup-item fade-in" style="grid-column: span 2;">
+                        <img src="assets/images/mockup-tds.jpg" alt="Technical Data Sheet">
+                        <div class="mockup-overlay">
+                            <span class="mono">ASSET: DOCUMENTATION</span>
+                            <h3>Technical Authority</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    <section id="market" class="section-padding bg-dark">
+        <div class="container">
+            <span class="mono text-red">04 // MARKET INTELLIGENCE</span>
+            <h2 style="font-size: 3rem; margin: 20px 0 60px 0;">THE LANDSCAPE</h2> 
+
+            <div class="comp-table fade-in">
+                <div class="comp-row" style="border-bottom: 2px solid rgba(255,255,255,0.2); font-family: 'JetBrains Mono'; color: var(--text-muted); font-size: 0.8rem;">
+                    <div>IDENTITY</div>
+                    <div>ARCHETYPE</div>
+                    <div>VISUAL SIGNAL</div>
+                    <div>PERCEPTION</div>
+                </div> 
+
+                <div class="comp-row">
+                    <div><img src="assets/images/competitor-sika.png" class="comp-logo" alt="Sika"></div>
+                    <div><span class="cell-header">ARCHETYPE</span>The Global Giant</div>
+                    <div><span class="cell-header">SIGNAL</span>Yellow Triangle</div>
+                    <div><span class="cell-header">PERCEPTION</span>Ubiquitous Utility</div>
+                </div> 
+
+                <div class="comp-row">
+                    <div><img src="assets/images/competitor-basf.png" class="comp-logo" alt="BASF"></div>
+                    <div><span class="cell-header">ARCHETYPE</span>Chemical Titan</div>
+                    <div><span class="cell-header">SIGNAL</span>Abstract Squares</div>
+                    <div><span class="cell-header">PERCEPTION</span>Raw Science</div>
+                </div> 
+
+                 <div class="comp-row">
+                    <div><img src="assets/images/competitor-fosroc.png" class="comp-logo" alt="Fosroc"></div>
+                    <div><span class="cell-header">ARCHETYPE</span>Legacy Player</div>
+                    <div><span class="cell-header">SIGNAL</span>Bold Type</div>
+                    <div><span class="cell-header">PERCEPTION</span>Traditional</div>
+                </div> 
+
+                <div class="comp-row dam-row">
+                    <div><img src="assets/images/logo-negative.png" class="comp-logo" alt="DAMmix"></div>
+                    <div style="font-weight: bold; color: white;"><span class="cell-header">ARCHETYPE</span>Precision Partner</div>
+                    <div style="font-weight: bold; color: white;"><span class="cell-header">SIGNAL</span>Engineered Trajectory</div>
+                    <div style="font-weight: bold; color: white;"><span class="cell-header">PERCEPTION</span>Design Through Limits</div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    <footer class="bg-dark" style="padding: 100px 0 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <div class="grid-2" style="margin-bottom: 80px;">
+                <div>
+                    <img src="assets/images/logo-negative.png" alt="DAMmix" style="height: 50px; margin-bottom: 30px;">
+                    <p style="color: rgba(255,255,255,0.5); max-width: 300px;">
+                        Addis Ababa, Ethiopia<br>
+                        Engineered for global standards.
+                    </p>
+                </div>
+                <div class="grid-3">
+                    <div>
+                        <h5 class="mono text-red" style="margin-bottom: 20px;">SYSTEM</h5>
+                        <ul style="list-style: none; color: white; line-height: 2; font-size: 0.9rem;">
+                            <li><a href="#" style="color: inherit; text-decoration: none; opacity: 0.7;">Download Assets</a></li>
+                            <li><a href="#" style="color: inherit; text-decoration: none; opacity: 0.7;">Guidelines PDF</a></li>
+                            <li><a href="#" style="color: inherit; text-decoration: none; opacity: 0.7;">Logo Pack</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="mono text-red" style="margin-bottom: 20px;">LAB</h5>
+                        <ul style="list-style: none; color: white; line-height: 2; font-size: 0.9rem;">
+                            <li><a href="#" style="color: inherit; text-decoration: none; opacity: 0.7;">TDS Portal</a></li>
+                            <li><a href="#" style="color: inherit; text-decoration: none; opacity: 0.7;">Method Statements</a></li>
+                            <li><a href="#" style="color: inherit; text-decoration: none; opacity: 0.7;">Certifications</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; font-size: 0.8rem; color: rgba(255,255,255,0.3);">
+                <span>© 2026 DAMmix Engineering. All Rights Reserved.</span>
+                <span class="mono">SYSTEM V.2.1 // STRESS TEST ADDED</span>
+            </div>
+        </div>
+    </footer> 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. Intersection Observer for Fade In
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.15
+            }; 
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions); 
+
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el)); 
+
+            // 2. Parallax Effect on Hero Background
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const heroBg = document.querySelector('.hero-bg');
+                // Slow down the scroll of the background image
+                if(heroBg) {
+                    heroBg.style.transform = 'translateY(' + (scrolled * 0.4) + 'px) scale(1.1)'; 
+                }
+            }); 
+
+            // 3. Smooth Scroll for Nav Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }); 
+
+            // 4. Fallback for missing images (Development helper)
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    console.log('Image missing: ' + this.src);
+                    this.style.display = 'none'; 
+                    const placeholder = document.createElement('div');
+                    placeholder.style.background = '#eee';
+                    placeholder.style.color = '#999';
+                    placeholder.style.display = 'flex';
+                    placeholder.style.alignItems = 'center';
+                    placeholder.style.justifyContent = 'center';
+                    placeholder.style.height = '100%';
+                    placeholder.style.minHeight = '200px';
+                    placeholder.style.padding = '20px';
+                    placeholder.style.border = '1px dashed #ccc';
+                    placeholder.innerText = 'Asset: ' + this.getAttribute('alt');
+                    this.parentNode.insertBefore(placeholder, this);
+                };
+            });
+        });
+    </script>
 </body>
 </html>
+
+
