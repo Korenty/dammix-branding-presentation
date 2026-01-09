@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. CORE VARIABLES & RESET --- */
@@ -21,6 +21,8 @@
             --text-main: #0F1F35;
             --text-muted: #64748B;
             --white: #FFFFFF;
+            --success: #10B981;
+            --warning: #F59E0B;
 
             /* Spacing & Layout */
             --container-width: 1280px;
@@ -31,7 +33,7 @@
             /* Borders & Shadows */
             --border-thin: 1px solid rgba(15, 31, 53, 0.1);
             --border-light: 1px solid rgba(255, 255, 255, 0.15);
-            --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
+            --shadow-card: 0 10px 30px rgba(0,0,0,0.05);
             --shadow-hover: 0 30px 60px rgba(0,0,0,0.12);
         }
 
@@ -117,7 +119,7 @@
         }
         .nav-links a:hover::after { width: 100%; }
 
-        /* --- 5. HERO SECTION (Dynamic) --- */
+        /* --- 5. HERO SECTION --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -184,7 +186,78 @@
         .variant-caption { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); }
         .variant-card.dark .variant-caption { color: rgba(255,255,255,0.5); }
 
-        /* --- 7. APPLICATION & MOCKUPS --- */
+        /* --- 7. STRESS LAB (NEW SECTION) --- */
+        .stress-lab {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+        }
+
+        .lab-card {
+            background: var(--white);
+            border: var(--border-thin);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        .lab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--dam-blue);
+        }
+
+        .lab-header {
+            padding: 30px;
+            background: var(--dam-blue);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .score-badge {
+            text-align: right;
+        }
+        .score-val { font-size: 2.5rem; font-weight: 800; line-height: 1; display: block; }
+        .score-label { font-size: 0.7rem; opacity: 0.7; font-family: 'JetBrains Mono'; }
+
+        .lab-body { padding: 30px; }
+        
+        .lab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .tag {
+            font-size: 0.7rem; font-family: 'JetBrains Mono'; padding: 4px 10px;
+            background: var(--concrete-grey); color: var(--text-muted); border-radius: 20px;
+        }
+
+        .status-pill {
+            display: inline-block; padding: 6px 12px; font-weight: 700; font-size: 0.8rem;
+            border-radius: 4px; margin-bottom: 20px;
+        }
+        .status-pass { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid var(--success); }
+        .status-warn { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid var(--warning); }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .analysis-list { list-style: none; }
+        .analysis-list li { margin-bottom: 8px; font-size: 0.9rem; padding-left: 20px; position: relative; }
+        .analysis-list.good li::before { content: '✔'; color: var(--success); position: absolute; left: 0; }
+        .analysis-list.bad li::before { content: '⚠️'; color: var(--warning); position: absolute; left: 0; }
+
+        .rec-box {
+            background: var(--concrete-grey);
+            padding: 20px;
+            border-left: 4px solid var(--dam-blue);
+            font-size: 0.9rem;
+        }
+        .rec-box strong { display: block; font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--dam-blue); margin-bottom: 6px; }
+
+        /* --- 8. APPLICATION & MOCKUPS --- */
         .mockup-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -215,7 +288,7 @@
         }
         .mockup-item:hover .mockup-overlay { opacity: 1; transform: translateY(0); }
 
-        /* --- 8. COMPETITOR MATRIX --- */
+        /* --- 9. COMPETITOR MATRIX --- */
         .comp-grid {
             display: grid;
             grid-template-columns: 200px 1fr;
@@ -223,6 +296,7 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         
+        .comp-table { width: 100%; }
         .comp-row {
             display: grid;
             grid-template-columns: 200px 1fr 1fr 1fr;
@@ -252,11 +326,13 @@
             .grid-4 { grid-template-columns: repeat(2, 1fr); }
             .comp-row { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
             .comp-row > div { margin-bottom: 10px; }
+            .stress-lab { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
             .nav-links { display: none; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .analysis-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -270,9 +346,9 @@
                 </a>
                 <div class="nav-links">
                     <a href="#system">Identity System</a>
+                    <a href="#lab-test">Stress Lab</a>
                     <a href="#applications">Real World</a>
                     <a href="#market">Market Data</a>
-                    <a href="#tech">Technical</a>
                     <a href="#" class="text-red">Contact Lab</a>
                 </div>
             </nav>
@@ -295,7 +371,7 @@
                 </p>
                 <div style="display: flex; gap: 16px;">
                     <a href="#system" class="btn btn-primary">VIEW BRAND SYSTEM</a>
-                    <a href="#applications" class="btn btn-outline">FIELD APPLICATIONS</a>
+                    <a href="#lab-test" class="btn btn-outline">VIEW TEST DATA</a>
                 </div>
             </div>
         </div>
@@ -349,14 +425,125 @@
         </div>
     </section>
 
-    <section id="applications" class="section-padding bg-grey">
+    <section id="lab-test" class="section-padding bg-grey">
+        <div class="container">
+            <span class="mono text-red">02 // FIELD VALIDATION</span>
+            <h2 style="font-size: 3rem; margin: 20px 0 60px 0;">REAL-WORLD STRESS TEST</h2>
+            
+            <div class="stress-lab">
+                
+                <div class="lab-card fade-in">
+                    <div class="lab-header">
+                        <div>
+                            <span class="mono" style="opacity: 0.7;">TEST ID: 001</span>
+                            <h3 style="margin-top: 5px;">PRODUCT PACKAGING</h3>
+                        </div>
+                        <div class="score-badge">
+                            <span class="score-val">9.2</span>
+                            <span class="score-label">OUT OF 10</span>
+                        </div>
+                    </div>
+                    <div class="lab-body">
+                        <div class="lab-tags">
+                            <span class="tag">DUST/SCRATCH</span>
+                            <span class="tag">LOW LIGHTING</span>
+                            <span class="tag">PARTIAL OBSTRUCTION</span>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <span class="mono" style="color: var(--text-muted); display:block; margin-bottom: 5px;">SCENARIO</span>
+                            <p style="font-size: 0.95rem;">200L steel drums, 1000L IBC tanks, and cement bags in harsh site conditions.</p>
+                        </div>
+
+                        <div class="status-pill status-pass">✅ PASS (STRONG)</div>
+
+                        <div class="analysis-grid">
+                            <div>
+                                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">WHY IT WORKS</h4>
+                                <ul class="analysis-list good">
+                                    <li>Bold DAM block is highly legible</li>
+                                    <li>Red “mix” creates fast brand recall</li>
+                                    <li>High contrast on white/metal</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">WATCH-OUTS</h4>
+                                <ul class="analysis-list bad">
+                                    <li>Symbol must not be printed too small</li>
+                                    <li>Red line risks loss if scaled below threshold</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="rec-box">
+                            <strong>RECOMMENDATION</strong>
+                            Define a minimum symbol size rule. Create a symbol-only mark variant for tight spaces.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-card fade-in" style="transition-delay: 0.1s;">
+                    <div class="lab-header">
+                        <div>
+                            <span class="mono" style="opacity: 0.7;">TEST ID: 002</span>
+                            <h3 style="margin-top: 5px;">SITE VISIBILITY</h3>
+                        </div>
+                        <div class="score-badge">
+                            <span class="score-val">8.4</span>
+                            <span class="score-label">OUT OF 10</span>
+                        </div>
+                    </div>
+                    <div class="lab-body">
+                        <div class="lab-tags">
+                            <span class="tag">MOTION (60KM/H)</span>
+                            <span class="tag">DISTANCE (40M)</span>
+                            <span class="tag">GLARE/DIRT</span>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <span class="mono" style="color: var(--text-muted); display:block; margin-bottom: 5px;">SCENARIO</span>
+                            <p style="font-size: 0.95rem;">Viewed on moving trucks and plants by operators and engineers from distance.</p>
+                        </div>
+
+                        <div class="status-pill status-warn">⚠️ PASS (WITH CAVEAT)</div>
+
+                        <div class="analysis-grid">
+                            <div>
+                                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">STRENGTHS</h4>
+                                <ul class="analysis-list good">
+                                    <li>DAM block is rock solid</li>
+                                    <li>Feels "technical" not decorative</li>
+                                    <li>Color contrast holds up well</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">WEAKNESSES</h4>
+                                <ul class="analysis-list bad">
+                                    <li>Abstract symbol slow to read from distance</li>
+                                    <li>Relies on familiarity, not instant shape recognition</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="rec-box">
+                            <strong>RECOMMENDATION</strong>
+                            Prioritize wordmark for distance branding. Use symbol for close-range premium contexts (like Sika/MC).
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="applications" class="section-padding bg-white">
         <div class="container">
             <div class="grid-lines">
                 <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
             </div>
             
             <div style="position: relative; z-index: 2;">
-                <span class="mono text-red">02 // FIELD STRESS TESTS</span>
+                <span class="mono text-blue">03 // VISUAL EVIDENCE</span>
                 <h2 style="font-size: 3rem; margin: 20px 0 60px 0;">APPLICATION MATRIX</h2>
 
                 <div class="mockup-gallery">
@@ -407,7 +594,7 @@
 
     <section id="market" class="section-padding bg-dark">
         <div class="container">
-            <span class="mono text-red">03 // MARKET POSITION</span>
+            <span class="mono text-red">04 // MARKET INTELLIGENCE</span>
             <h2 style="font-size: 3rem; margin: 20px 0 60px 0;">THE LANDSCAPE</h2>
 
             <div class="comp-table fade-in">
@@ -481,7 +668,7 @@
             
             <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; font-size: 0.8rem; color: rgba(255,255,255,0.3);">
                 <span>© 2026 DAMmix Engineering. All Rights Reserved.</span>
-                <span class="mono">SYSTEM V.2.0 // IMAGERY LOADED</span>
+                <span class="mono">SYSTEM V.2.1 // STRESS TEST ADDED</span>
             </div>
         </div>
     </footer>
@@ -528,12 +715,11 @@
             });
 
             // 4. Fallback for missing images (Development helper)
-            // If an image fails to load, it shows a placeholder block so layout doesn't break
             const images = document.querySelectorAll('img');
             images.forEach(img => {
                 img.onerror = function() {
                     console.log('Image missing: ' + this.src);
-                    this.style.display = 'none'; // Or replace with a colored div
+                    this.style.display = 'none'; 
                     const placeholder = document.createElement('div');
                     placeholder.style.background = '#eee';
                     placeholder.style.color = '#999';
@@ -552,4 +738,3 @@
     </script>
 </body>
 </html>
-
